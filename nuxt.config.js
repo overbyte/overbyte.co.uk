@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'overbyte.co.uk',
+      title: 'Allandt Bik-Elliott :: Developer',
     htmlAttrs: {
       lang: 'en'
     },
@@ -20,6 +20,8 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+      'normalize.css/normalize.css',
+      '~assets/css/main.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
