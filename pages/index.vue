@@ -1,90 +1,68 @@
 <template>
-    <div class="container">
+    <div>
+        <section id="home" class="hero">
+            <div>
+                <h1 class="hello">Hello!</h1>
 
-        <nav>
-            <div class="logo">
-                Allandt Bik-Elliott
+                <h2>
+                    My name is Allandt (I'll tell you how it's pronounced, if you fancy a chat), a developer living in Hertford, a train-ride away from London.
+                </h2>
+
+                <h3>
+                    I have experience creating front-ends for websites, installations for events and mobile apps.
+                </h3>
+
             </div>
-            <a href="#home">Home</a>
-            <a href="#work">Work</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-        </nav>
-        <div>
-            <Logo />
-            <h1>
-                Hello!
-            </h1>
+        </section>
 
-            <h2>
-                My name is Allandt (I'll tell you how it's pronounced, if you fancy a
-                chat), a developer living in Hertford, a train-ride away from London.
-            </h2>
-
-            <h3>
-                I have experience creating front-ends for websites, installations for
-                events and mobile apps.
-            </h3>
-
-            <div class="links">
-                <a href="https://nuxtjs.org/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="button--green">
-                    Documentation
-                </a>
-                <a href="https://github.com/nuxt/nuxt.js"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="button--grey">
-                    GitHub
-                </a>
-            </div>
-        </div>
+        <section id="work">
+            <article v-for="job in jobs">
+                {{ job }}
+            </article>
+        </section>
     </div>
 </template>
 
 <script>
-export default {}
+import axios from 'axios';
+
+export default {
+    asyncData(context) {
+        return axios
+            .get(`https://api.storyblok.com/v1/cdn/stories/?version=published&token=${process.env.SB_TOKEN}&cv=${process.env.SB_CV}`)
+            .then(res => res.data)
+            .then(res => {
+                return {
+                    jobs: res.stories
+                        .filter(item => item.name === 'work')[0]
+                        .content.jobs,
+                    home: res.stories
+                        .filter(item => item.name ==='home')[0],
+                };
+            })
+        ;
+    },
+}
 </script>
 
-<style>
-.container {
+<style lang="scss">
+.hero {
     margin: 0 auto;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-}
+    padding: 3em;
+    background-color: lightblue;
 
-.title {
-    font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-    display: block;
-    font-weight: 300;
-    font-size: 100px;
-    color: #35495e;
-    letter-spacing: 1px;
+    h1 {
+        font-size: 6em;
+        font-weight: 300;
+        color: var(--secondary);
+    }
 }
-
-.subtitle {
-    font-weight: 300;
-    font-size: 42px;
-    color: #526488;
-    word-spacing: 5px;
-    padding-bottom: 15px;
-}
-
-.links {
-    padding-top: 15px;
+#work {
+    color: var(--tertiary);
 }
 </style>
