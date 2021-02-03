@@ -21,8 +21,20 @@ export default {
     border-bottom: 1px solid var(--primary);
     background-color: var(--background);
 
+    h2 {
+        margin-top: 0;
+    }
+
+    h3 {
+        font-weight: 700;
+        font-size: 3em;
+        color: rgba(255, 255, 255, 0.3);
+        margin-top: -0.75em;
+        margin-left: 1em;
+    }
+
     h4 {
-        font-weight: 300;
+        font-weight: 400;
     }
 
     p {
