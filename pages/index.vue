@@ -2,15 +2,9 @@
     <div>
         <section id="home" class="hero">
             <div>
-                <h1 class="hello">Hello!</h1>
-
-                <h2>
-                    My name is Allandt (I'll tell you how it's pronounced, if you fancy a chat), a developer living in Hertford, a train-ride away from London.
-                </h2>
-
-                <h3>
-                    I have experience creating front-ends for websites, installations for events and mobile apps.
-                </h3>
+                <h1 class="hello">{{ home.title }}</h1>
+                <h2>{{ home.subtitle }}</h2>
+                <h3>{{ home.body }}</h3>
 
             </div>
         </section>

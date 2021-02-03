@@ -6,7 +6,7 @@
     </div>
 </template>
 
-<style>
+<style lang="scss">
 
 .button--green {
     display: inline-block;
