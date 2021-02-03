@@ -23,15 +23,16 @@ import axios from 'axios';
 export default {
     asyncData(context) {
         return axios
-            .get(`https://api.storyblok.com/v1/cdn/stories/?version=published&token=${process.env.SB_TOKEN}&cv=${process.env.SB_CV}`)
-            .then(res => res.data)
+            .get(`https://api.storyblok.com/v1/cdn/spaces/me/?token=${process.env.SB_TOKEN}`)
+            .then(res => axios.get(`https://api.storyblok.com/v1/cdn/stories/?version=published&token=${process.env.SB_TOKEN}&cv=${res.data.space.version}`))
             .then(res => {
                 return {
-                    jobs: res.stories
+                    jobs: res.data.stories
                         .filter(item => item.name === 'work')[0]
                         .content.jobs,
-                    home: res.stories
-                        .filter(item => item.name ==='home')[0],
+                    home: res.data.stories
+                        .filter(item => item.name ==='home')[0]
+                        .content,
                 };
             })
         ;
