@@ -10,9 +10,7 @@
         </section>
 
         <section id="work">
-            <article v-for="job in jobs">
-                {{ job }}
-            </article>
+            <ObJob v-for="job in jobs" :job="job"></ObJob>
         </section>
     </div>
 </template>
