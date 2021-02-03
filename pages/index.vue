@@ -5,12 +5,11 @@
                 <h1 class="hello">{{ home.title }}</h1>
                 <h2>{{ home.subtitle }}</h2>
                 <h3>{{ home.body }}</h3>
-
             </div>
         </section>
 
         <section id="work">
-            <ObJob v-for="job in jobs" :job="job"></ObJob>
+            <ObJob v-for="job in jobs" :key="job._uid" :job="job"></ObJob>
         </section>
     </div>
 </template>
@@ -24,13 +23,12 @@ export default {
             .get(`https://api.storyblok.com/v1/cdn/spaces/me/?token=${process.env.SB_TOKEN}`)
             .then(res => axios.get(`https://api.storyblok.com/v1/cdn/stories/?version=published&token=${process.env.SB_TOKEN}&cv=${res.data.space.version}`))
             .then(res => {
+                console.log(res.data.stories);
                 return {
                     jobs: res.data.stories
-                        .filter(item => item.name === 'work')[0]
-                        .content.jobs,
+                        .filter(item => item.content.component === 'job'),
                     home: res.data.stories
-                        .filter(item => item.name ==='home')[0]
-                        .content,
+                        .filter(item => item.name ==='home')[0].content,
                 };
             })
         ;

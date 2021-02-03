@@ -1,9 +1,12 @@
 <template>
     <div class="job">
-        <h2>{{ job.title }}</h2>
-        <h3>{{ job.type }}</h3>
-        <h4>{{ job.agency }} :: {{ job.client }}</h4>
-        <p>{{ job.body }}</p>
+        <h2>{{ job.content.title }}</h2>
+        <h3>{{ job.content.type }}</h3>
+        <h4>{{ job.content.agency }} | {{ job.content.client }}</h4>
+        <p>{{ job.content.body }}</p>
+        <ul>
+            <li v-for="tag in job.tag_list">{{ tag }}</li>
+        </ul>
     </div>
 </template>
 
@@ -35,10 +38,21 @@ export default {
 
     h4 {
         font-weight: 400;
+        color: var(--secondary);
     }
 
     p {
         color: var(--primary);
+    }
+
+    ul {
+        margin-top: 1em;
+        padding: 0;
+
+        li {
+            display: inline-block;
+            margin: 0 0.5em 0 0;
+        }
     }
 }
 </style>
