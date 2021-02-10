@@ -26,7 +26,10 @@ export default {
                 console.log(res.data.stories);
                 return {
                     jobs: res.data.stories
-                        .filter(item => item.content.component === 'job'),
+                        .filter(item => item.content.component === 'job')
+                        .sort((a, b) => 
+                            parseInt(b.content.year) > parseInt(a.content.year)
+                        ),
                     home: res.data.stories
                         .filter(item => item.name ==='home')[0].content,
                 };
