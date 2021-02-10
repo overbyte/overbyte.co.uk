@@ -2,7 +2,10 @@
     <div class="job">
         <h2>{{ job.content.title }}</h2>
         <h3>{{ job.content.type }}</h3>
-        <h4>{{ job.content.agency }} | {{ job.content.client }}</h4>
+        <h4>{{ job.content.agency }} 
+            | {{ job.content.client }} 
+            | {{ job.content.year }}
+        </h4>
         <p>{{ job.content.body }}</p>
         <ul>
             <li v-for="tag in job.tag_list">{{ tag }}</li>
