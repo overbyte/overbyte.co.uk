@@ -9,7 +9,7 @@
         </section>
 
         <section id="work">
-            <ObJob v-for="job in jobs" :key="job._uid" :job="job"></ObJob>
+            <ObJob v-for="job in jobs" :key="job.id" :job="job"></ObJob>
         </section>
     </div>
 </template>
