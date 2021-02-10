@@ -50,8 +50,13 @@ export default {
         padding: 0;
 
         li {
+            font-size: 0.9em;
             display: inline-block;
-            margin: 0 0.5em 0 0;
+            margin: 0 0.5rem 0.5rem 0;
+            padding: 0.5rem;
+            background-color: var(--tag-bg);
+            color: var(--tag-col);
+            border-radius: 1rem;
         }
     }
 }
