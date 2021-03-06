@@ -7,8 +7,9 @@
             | {{ job.content.year }}
         </h4>
         <p>{{ job.content.body }}</p>
-        <ul>
-            <li v-for="tag in job.tag_list">{{ tag }}</li>
+        <ul class="taglist">
+            <li class="tag" v-for="tag in job.tag_list"
+                @click="$emit('filterByTag', tag)">{{ tag }}</li>
         </ul>
     </div>
 </template>
@@ -48,18 +49,35 @@ export default {
         color: var(--primary);
     }
 
-    ul {
+    .taglist {
         margin-top: 1em;
         padding: 0;
 
-        li {
-            font-size: 0.9em;
+        .tag {
+            font-size: 0.7em;
             display: inline-block;
+            cursor: pointer;
+            text-decoration: none;
             margin: 0 0.5rem 0.5rem 0;
             padding: 0.5rem;
             background-color: var(--tag-bg);
             color: var(--tag-col);
-            border-radius: 1rem;
+            border-radius: 0.1rem;
+            box-shadow: 3px 3px 2px 0 rgba(0,0,0,0.4);
+            &:hover {
+                box-shadow: none;
+            }
+            &::before {
+                display: inline-block;
+                font-style: normal;
+                font-variant: normal;
+                text-rendering: auto;
+                -webkit-font-smoothing: antialiased;
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                content: "\f02b";
+                margin-right: 0.25rem;
+            }
         }
     }
 }

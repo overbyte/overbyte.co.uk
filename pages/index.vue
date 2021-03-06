@@ -9,7 +9,8 @@
         </section>
 
         <section id="work">
-            <ObJob v-for="job in jobs" :key="job.id" :job="job"></ObJob>
+            <ObJob @filterByTag="filterByTag" v-for="job in jobs" :key="job.id" :job="job"></ObJob>
+        </section>
         </section>
     </div>
 </template>
@@ -23,19 +24,24 @@ export default {
             .get(`https://api.storyblok.com/v1/cdn/spaces/me/?token=${process.env.SB_TOKEN}`)
             .then(res => axios.get(`https://api.storyblok.com/v1/cdn/stories/?version=published&token=${process.env.SB_TOKEN}&cv=${res.data.space.version}`))
             .then(res => {
-                console.log(res.data.stories);
                 return {
                     jobs: res.data.stories
                         .filter(item => item.content.component === 'job')
                         .sort((a, b) => 
                             parseInt(b.content.year) > parseInt(a.content.year)
-                        ),
+                                ? 1 
+                                : -1),
                     home: res.data.stories
                         .filter(item => item.name ==='home')[0].content,
                 };
             })
         ;
     },
+    methods: {
+        filterByTag(tag) {
+            console.log('caught fbt', tag);
+        },
+    }
 }
 </script>
 
